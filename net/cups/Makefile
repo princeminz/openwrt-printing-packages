@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cups
 PKG_VERSION:=2.1.4
-PKG_RELEASE:=1
+PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-source.tar.gz
 PKG_SOURCE_URL:= \
@@ -32,7 +32,7 @@ define Package/cups
 $(call Package/cups/Default)
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=+libcups +libcupsmime +libcupscgi +libcupsppdc +libusb-1.0 +libavahi-dbus-support +libavahi-client +libdbus +avahi-autoipd +avahi-dnsconfd
+  DEPENDS:=+libcups +libcupsmime +libcupscgi +libcupsppdc +libusb-1.0 +avahi-daemon +libavahi-client +libdbus +avahi-autoipd +avahi-dnsconfd
   TITLE:=Common UNIX Printing System (daemon)
 endef
 
@@ -74,17 +74,17 @@ define Package/cups-client/description
 	Common UNIX Printing System - Client commands
 endef
 
-# define Package/cups-filters
-# $(call Package/cups/Default)
-#   SECTION:=net
-#   CATEGORY:=Network
-#   DEPENDS:=+libcupsimage
-#   TITLE:=Common UNIX Printing System - Filter
-# endef
+#define Package/cups-filters
+#$(call Package/cups/Default)
+#  SECTION:=net
+#  CATEGORY:=Network
+#  DEPENDS:=+libcupsimage
+#  TITLE:=Common UNIX Printing System - Filter
+#endef
 
-# define Package/cups-filters/description
-# 	Common UNIX Printing System - Filter
-# endef
+#define Package/cups-filters/description
+#	Common UNIX Printing System - Filter
+#endef
 
 define Package/cups-ppdc
 $(call Package/cups/Default)
@@ -426,6 +426,7 @@ define Package/cups/install
 	rm -rf $(1)/etc/cups
 	$(INSTALL_DIR) $(1)/etc/cups
 	$(CP) $(PKG_INSTALL_DIR)/etc/cups/* $(1)/etc/cups/
+	echo '' > $(1)/etc/cups/printers.conf
 	rm -rf $(1)/etc/cups/certs
 	ln -sf /tmp $(1)/etc/cups/certs
 	rm -f $(1)/usr/bin/cups-config
@@ -495,12 +496,12 @@ define Package/cups-client/install
 	(cd $(1)/usr/sbin; ln -sf cupsaccept accept; ln -sf cupsaccept cupsenable; ln -sf cupsaccept cupsdisable; ln -sf cupsaccept reject; ln -sf cupsaccept cupsreject;)
 endef
 
-# define Package/cups-filters/install
-# 	$(INSTALL_DIR) $(1)/usr/lib/cups/filter
-# 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/cups/filter/{bannertops,commandtoescpx,commandtopclx,imagetops,imagetoraster,pdftops,rastertoepson,rastertopwg,rastertohp,rastertoescpx,rastertopclx,rastertolabel,texttops} \
-# 		$(1)/usr/lib/cups/filter
-# 	(cd $(1)/usr/lib/cups/filter; ln -sf rastertolabel rastertodymo;)
-# endef
+#define Package/cups-filters/install
+#	$(INSTALL_DIR) $(1)/usr/lib/cups/filter
+#	$(CP) $(PKG_INSTALL_DIR)/usr/lib/cups/filter/{bannertops,commandtoescpx,commandtopclx,imagetops,imagetoraster,pdftops,rastertoepson,rastertopwg,rastertohp,rastertoescpx,rastertopclx,rastertolabel,texttops} \
+#		$(1)/usr/lib/cups/filter
+#	(cd $(1)/usr/lib/cups/filter; ln -sf rastertolabel rastertodymo;)
+#endef
 
 define Package/cups-ppdc/install
 	$(INSTALL_DIR) $(1)/usr/bin
