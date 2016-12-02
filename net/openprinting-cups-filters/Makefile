@@ -88,8 +88,7 @@ endef
 
 define Package/postinst
 #!/bin/sh
-/etc/init.d/cupsd stop
-/etc/init.d/cupsd start
+/etc/init.d/cupsd enabled && /etc/init.d/cupsd restart
 endef
 
 $(eval $(call BuildPackage,openprinting-cups-filters))
