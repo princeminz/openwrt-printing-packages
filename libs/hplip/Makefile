@@ -56,7 +56,7 @@ endef
 define Package/hplip/install
 	make -C $(PKG_BUILD_DIR) install DESTDIR=$(1)
 	rm -rf $(1)/etc/udev $(1)/usr/bin $(1)/usr/lib/systemd $(1)/usr/lib/python2.7
-	rm -rf $(1)/usr/share/doc $(1)/usr/share/hal
+	rm -rf $(1)/usr/share/doc $(1)/usr/share/hal $(1)/var
 	mv $(1)/usr/share/hplip/data $(1)/usr/share/hplip-data
 	rm -rf $(1)/usr/share/hplip
 	mkdir -p $(1)/usr/share/hplip
@@ -69,7 +69,9 @@ endef
 
 define Package/postinst
 #!/bin/sh
+[ -n "$$IPKG_INSTROOT" ] || {
 /etc/init.d/cupsd enabled && /etc/init.d/cupsd restart
+}
 endef
 
 $(eval $(call BuildPackage,hplip))
