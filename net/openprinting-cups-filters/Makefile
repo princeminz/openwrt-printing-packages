@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openprinting-cups-filters
-PKG_VERSION:=1.12.0
-PKG_RELEASE:=1
+PKG_VERSION:=1.0.37
+PKG_RELEASE:=2
 
 PKG_SOURCE:=cups-filters-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=http://www.openprinting.org/download/cups-filters/
-PKG_MD5SUM:=79c6df031cd97bfeba15edcb305063ca
+PKG_MD5SUM:=210e5cb70e9474b91dd2ab4291a5e48e
 PKG_BUILD_DIR:=$(BUILD_DIR)/cups-filters-$(PKG_VERSION)
 
 PKG_INSTALL:=1
@@ -24,7 +24,7 @@ define Package/openprinting-cups-filters
   SECTION:=Net
   CATEGORY:=Network
   TITLE:=OpenPrinting CUPS filters
-  DEPENDS:=+cups +libcupsimage +fontconfig +libijs +libtiff +libjpeg +libpng +poppler +qpdf +glib2 +libiconv-full
+  DEPENDS:=+cups +libcupsimage +fontconfig +libijs +libtiff +libjpeg +libpng +poppler +qpdf +glib2
   URL:=http://www.openprinting.org
   SUBMENU:=Printing
 endef
@@ -88,9 +88,7 @@ endef
 
 define Package/postinst
 #!/bin/sh
-[ -n "$$IPKG_INSTROOT" ] || {
 /etc/init.d/cupsd enabled && /etc/init.d/cupsd restart
-}
 endef
 
 $(eval $(call BuildPackage,openprinting-cups-filters))
