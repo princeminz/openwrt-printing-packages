@@ -15,7 +15,7 @@ start_service() {
 	mkdir -m 0755 -p /var/spool/cups/tmp
 	mkdir -m 0755 -p /tmp/etc/cups
 	. /lib/functions/network.sh; network_get_subnet subnet lan
-	subnet="`ipcalc.sh $subnet | tr \\n ' ' | sed -n 's|.*NETWORK=\([0-9.]*\) PREFIX=\([0-9]*\) |\1/\2|p'`"
+	subnet="`ipcalc.sh $subnet | tr \\\\n ' ' | sed -n 's|.*NETWORK=\([0-9.]*\) PREFIX=\([0-9]*\) |\1/\2|p'`"
 	[ -n "$subnet" ] || subnet="127.0.0.0/8"
 	sed "s|@localnet@|$subnet|"  /etc/cups/cupsd.conf.template > /tmp/etc/cups/cupsd.conf
 	[ -e /etc/cups/cupsd.conf ] || ln -s ../../tmp/etc/cups/cupsd.conf /etc/cups/cupsd.conf

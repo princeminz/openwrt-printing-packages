@@ -42,7 +42,7 @@ endef
 
 define Package/cups/conffiles
 /etc/cups/classes.conf
-/etc/cups/cupsd.conf
+/etc/cups/cupsd.conf.template
 /etc/cups/printers.conf
 endef
 
@@ -426,7 +426,6 @@ define Package/cups/install
 	rm -rf $(1)/etc/cups
 	$(INSTALL_DIR) $(1)/etc/cups
 	$(CP) $(PKG_INSTALL_DIR)/etc/cups/* $(1)/etc/cups/
-	echo '' > $(1)/etc/cups/printers.conf
 	rm -rf $(1)/etc/cups/certs
 	ln -sf /tmp $(1)/etc/cups/certs
 	rm -f $(1)/usr/bin/cups-config
