@@ -88,7 +88,9 @@ endef
 
 define Package/postinst
 #!/bin/sh
+[ -n "$$IPKG_INSTROOT" ] || {
 /etc/init.d/cupsd enabled && /etc/init.d/cupsd restart
+}
 endef
 
 $(eval $(call BuildPackage,openprinting-cups-filters))
