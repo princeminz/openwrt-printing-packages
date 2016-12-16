@@ -24,6 +24,7 @@ along with NUCI.  If not, see <http://www.gnu.org/licenses/>.
 local fs = require "nixio.fs"
 
 m = Map("CUPS", translate("CUPS"))
+m.pageaction = false
 s = m:section(SimpleSection)
 s.template = "cups"
 

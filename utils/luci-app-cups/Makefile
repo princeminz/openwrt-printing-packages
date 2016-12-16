@@ -39,7 +39,7 @@ endef
 define Build/Compile
 endef
 
-define Package/luci-app-lxc/install
+define Package/luci-app-cups/install
 	$(INSTALL_DIR) $(1)/usr/lib/lua/luci/controller/
 	$(INSTALL_BIN) \
 		./files/controller/cups.lua \
