@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=cups
 PKG_VERSION:=2.1.4
-PKG_RELEASE:=4
+PKG_RELEASE:=3
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION)-source.tar.gz
 PKG_SOURCE_URL:= \
@@ -450,8 +450,6 @@ define Package/cups/install
 		$(1)/usr/share/cups/templates/
 	$(INSTALL_DIR) $(1)/usr/share/cups/mime
 	$(CP) $(PKG_INSTALL_DIR)/usr/share/cups/mime/* $(1)/usr/share/cups/mime/
-	$(INSTALL_DIR) $(1)/usr/share/cups/data
-	$(CP) $(PKG_INSTALL_DIR)/usr/share/cups/data/* $(1)/usr/share/cups/data/
 	### Do not install any docs.
 	### Do install docs: cups web interface relies on them
 	$(INSTALL_DIR) $(1)/usr/share/doc/cups
