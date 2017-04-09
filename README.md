@@ -8,7 +8,7 @@ Notably it has:
 - Gutenprint 5.2.12
 - Cups 1.6.3
 - OpenPrinting's cups-filters 1.0.37
-- poppler 0.24.1
+- poppler 0.53.0
 - many other packages to make sure the ones above work...
 
 [package feed]: http://wiki.openwrt.org/doc/devel/feeds
