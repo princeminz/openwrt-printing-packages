@@ -28,7 +28,7 @@ Notably it has:
 - add this line to your `feeds.conf` or `feeds.conf.default`
 
 ```
-src-git printing git://github.com/FranciscoBorges/openwrt-printing-packages.git
+src-git printing git://github.com/lawyiu/openwrt-printing-packages.git
 ```
 
 - to compile everything in this feed you should use the script `setup-buildsystem.sh` or some variation of those commands.
@@ -47,9 +47,7 @@ src/gz printing file:/storage/printer/packages
 
 - see `opkg-install-printing-packages.sh` to see a suggestion of what to install.
 
-- tested against *Attitude Adjustment* (because that is what I have installed...).
-
-- Avahi is notified of printers added to Cups, and these will appear as *Air Printer*'s in iOS devices.
+- tested against OpenWrt's development trunk.
 
 ### Issues / Missing / TODO
 
