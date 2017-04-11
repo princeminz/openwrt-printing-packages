@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openprinting-cups-filters
-PKG_VERSION:=1.0.37
-PKG_RELEASE:=2
+PKG_VERSION:=1.13.4
+PKG_RELEASE:=1
 
 PKG_SOURCE:=cups-filters-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=http://www.openprinting.org/download/cups-filters/
-PKG_MD5SUM:=210e5cb70e9474b91dd2ab4291a5e48e
+PKG_HASH:=94c7d6624f16a8c11683c863e6457c5daa70e60f9a739c355349b45c3abc8dbd
 PKG_BUILD_DIR:=$(BUILD_DIR)/cups-filters-$(PKG_VERSION)
 
 PKG_INSTALL:=1
@@ -46,12 +46,14 @@ define Build/Configure
 	--disable-ssl \
 	--disable-gssapi \
 	--disable-avahi \
+	--disable-dbus \
 	)
 endef
 
 define Package/openprinting-cups-filters/install
 	$(INSTALL_DIR) $(1)/usr/bin $(1)/usr/lib/
-	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/* $(1)/usr/bin/
+	$(INSTALL_BIN) $(PKG_INSTALL_DIR)/usr/bin/ttfread $(1)/usr/bin/
+	$(CP) -P $(PKG_INSTALL_DIR)/usr/bin/{driverless,foomatic-rip} $(1)/usr/bin/
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/* $(1)/usr/lib/
 	$(CP) -r $(PKG_INSTALL_DIR)/usr/lib/cups $(1)/usr/lib/
 	$(INSTALL_DIR) $(1)/usr/share/cups $(1)/usr/share/ppd/cupsfilters

@@ -7,7 +7,7 @@ Notably it has:
 - Ghostscript 9.06
 - Gutenprint 5.2.12
 - Cups 1.6.3
-- OpenPrinting's cups-filters 1.0.37
+- OpenPrinting's cups-filters 1.13.4
 - poppler 0.53.0
 - many other packages to make sure the ones above work...
 
