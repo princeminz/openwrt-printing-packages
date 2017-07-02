@@ -6,12 +6,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openprinting-cups-filters
-PKG_VERSION:=1.13.4
+PKG_VERSION:=1.14.1
 PKG_RELEASE:=1
 
 PKG_SOURCE:=cups-filters-$(PKG_VERSION).tar.xz
 PKG_SOURCE_URL:=http://www.openprinting.org/download/cups-filters/
-PKG_HASH:=94c7d6624f16a8c11683c863e6457c5daa70e60f9a739c355349b45c3abc8dbd
+PKG_HASH:=f1393731df54ffdd947621c302a66afa17cd3d6c7e107ee05cc77a7d3194e504
 PKG_BUILD_DIR:=$(BUILD_DIR)/cups-filters-$(PKG_VERSION)
 
 PKG_INSTALL:=1
@@ -37,9 +37,8 @@ endef
 define Build/Configure
 	$(call Build/Configure/Default, \
 	--enable-imagefilters \
-	--with-pdftops=gs \
-	--with-gs-path=/usr/bin/gs \
-	--with-pdftops-path=/usr/bin/gs \
+	--with-pdftops=pdftops \
+	--with-pdftops-path=/usr/bin/poppler \
 	--disable-gnutls \
 	--disable-openssl \
 	--disable-cdsassl \
